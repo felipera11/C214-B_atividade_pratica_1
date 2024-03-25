@@ -49,7 +49,25 @@ public class RequestHorariosTest {
     @Test(expected = JsonParseException.class)
     public void requestHorariosThrowsExceptionForInvalidJson() {
         RequestHorarios request = new RequestHorarios();
-        request.requestHorarios("invalid json");
-
+        request.requestHorarios("chris lima");
     }
+
+    @Test
+    public void testRequestHorarios() {
+        RequestHorarios request = new RequestHorarios();
+        request.requestHorarios("{\"nomeDoProfessor\":\"Chris\",\"horarioDeAtendimento\":\"10:00\",\"periodo\":\"Manhã\",\"sala\":5,\"predio\":1}");
+    }
+
+    @Test
+    public void testRequestHorarios2() {
+        RequestHorarios request = new RequestHorarios();
+        request.requestHorarios("{\"nomeDoProfessor\":\"Professor\",\"horarioDeAtendimento\":\"10:00\",\"periodo\":\"Manhã\",\"sala\":1,\"predio\":1}");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void requestHorariosThrowsExceptionForZeroOrNegativeSala() {
+        RequestHorarios request = new RequestHorarios();
+        request.requestHorarios("{\"nomeDoProfessor\":\"Chris\",\"horarioDeAtendimento\":\"10:00\",\"periodo\":\"Manhã\",\"sala\":0,\"predio\":1}");
+    }
+
 }
