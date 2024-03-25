@@ -5,7 +5,7 @@ import com.google.gson.JsonParser;
 
 public class RequestHorarios {
 
-    public void requestHorarios(String json){
+    public void requestHorarios(String json) {
         JsonObject jsonObject = JsonParser.parseString(json).getAsJsonObject();
         String nomeDoProfessor = jsonObject.get("nomeDoProfessor").getAsString();
         String horarioDeAtendimento = jsonObject.get("horarioDeAtendimento").getAsString();
@@ -13,14 +13,16 @@ public class RequestHorarios {
         int sala = jsonObject.get("sala").getAsInt();
         int predio = jsonObject.get("predio").getAsInt();
         Horarios horario = new Horarios(nomeDoProfessor, horarioDeAtendimento, periodo, sala, predio);
-    }
 
-    public int calculatePredio(int sala){
         if (sala <= 0) {
             throw new IllegalArgumentException("Sala number must be greater than 0");
         }
-        int indicePredio = (sala - 1) / 5;
+    }
 
-        return indicePredio;
+    public int calculatePredio(int sala) {
+        if (sala <= 0) {
+            throw new IllegalArgumentException("Sala number must be greater than 0");
+        }
+        return (sala - 1) / 5;
     }
 }
